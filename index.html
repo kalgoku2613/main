@@ -2,380 +2,399 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Magical Love Experience ✨💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<title>Happy Birthday My Queen 🖤🤍</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
+
+/* ======================================================= */
+/* RESET */
+/* ======================================================= */
 *{margin:0;padding:0;box-sizing:border-box;}
 
-body{
-font-family:'Poppins',sans-serif;
+html,body{
 height:100vh;
+width:100%;
+background:#000;
+color:#fff;
+font-family:'Montserrat',sans-serif;
 overflow:hidden;
-background:radial-gradient(circle at 30% 20%,#ffd6ec,#ffc2e2,#ff9fcd);
+}
+
+/* ======================================================= */
+/* FULLSCREEN ENTER */
+/* ======================================================= */
+#enterScreen{
+position:fixed;
+inset:0;
+background:#000;
 display:flex;
 justify-content:center;
 align-items:center;
+flex-direction:column;
+text-align:center;
+z-index:9999;
+cursor:pointer;
 }
 
-/* ===================================================== */
-/* BACKGROUND GLOW */
-/* ===================================================== */
-body::before{
-content:"";
+.enterTitle{
+font-family:'Great Vibes',cursive;
+font-size:3rem;
+animation:glow 2s infinite alternate;
+}
+
+.enterSub{
+margin-top:10px;
+opacity:.7;
+}
+
+/* ======================================================= */
+/* MAIN LAYOUT */
+/* ======================================================= */
+.app{
 position:fixed;
 inset:0;
-background:radial-gradient(circle at 70% 80%,rgba(255,255,255,0.5),transparent 40%);
-animation:glowMove 12s infinite alternate;
-z-index:-2;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
 }
 
-@keyframes glowMove{
-from{transform:translate(0,0);} 
-to{transform:translate(-60px,-40px);} 
-}
-
-#stars{position:fixed;inset:0;z-index:-1;}
-
-/* ===================================================== */
-/* START SCREEN */
-/* ===================================================== */
-#startScreen{
-position:fixed;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;
-background:linear-gradient(135deg,#ff4fa3,#ff7ec4,#ffc1e3);
-color:white;z-index:9999;cursor:pointer;text-align:center;
-}
-
-#startScreen h1{
-font-family:'Great Vibes',cursive;
-font-size:3.3rem;
-animation:pulse 2s infinite;
-}
-
-#startScreen p{margin-top:12px;opacity:.9;font-size:1.1rem;}
-
-@keyframes pulse{
-0%,100%{transform:scale(1);} 
-50%{transform:scale(1.1);} 
-}
-
-/* ===================================================== */
-/* MAIN CARD */
-/* ===================================================== */
 .card{
-width:440px;padding:50px 35px;border-radius:30px;background:rgba(255,255,255,0.35);
-backdrop-filter:blur(25px);box-shadow:0 40px 80px rgba(0,0,0,.2);
-text-align:center;transform:scale(.85);opacity:0;transition:1s;
+width:100%;
+max-width:480px;
+max-height:90vh;
+overflow:auto;
+
+background:rgba(255,255,255,0.04);
+backdrop-filter:blur(20px);
+
+border-radius:30px;
+padding:28px 22px 34px;
+text-align:center;
+
+box-shadow:0 0 80px rgba(255,255,255,0.08);
+animation:cardEnter 1.2s ease;
 }
 
-.card.show{opacity:1;transform:scale(1);}
+@keyframes cardEnter{
+from{opacity:0;transform:scale(.85) translateY(60px);} 
+to{opacity:1;transform:scale(1) translateY(0);} }
 
-.card h2{
+/* ======================================================= */
+/* TITLE */
+/* ======================================================= */
+.title{
 font-family:'Great Vibes',cursive;
-font-size:2.6rem;
-color:#c2185b;
-margin-bottom:40px;
+font-size:clamp(2.4rem,8vw,3.4rem);
+animation:glow 3s infinite alternate;
 }
 
-.buttons{position:relative;height:90px;}
+@keyframes glow{
+from{text-shadow:0 0 10px #fff;} 
+to{text-shadow:0 0 40px #fff;} }
 
-button{
-width:150px;height:58px;border:none;border-radius:30px;font-size:18px;
-cursor:pointer;position:absolute;transition:.3s;font-weight:600;
-display:flex;align-items:center;justify-content:center;gap:6px;
+.subtitle{opacity:.65;margin-top:6px;}
+
+/* ======================================================= */
+/* HEART */
+/* ======================================================= */
+.heroHeart{
+font-size:clamp(60px,15vw,90px);
+animation:beat 1.3s infinite;
+margin:16px 0 14px;
 }
 
-#yes{
-left:0;
-background:#ff4fa3;
-color:white;
-box-shadow:0 15px 30px rgba(255,79,163,.5);
+@keyframes beat{
+0%,100%{transform:scale(1);}50%{transform:scale(1.35);} }
+
+/* ======================================================= */
+/* POEM */
+/* ======================================================= */
+.poem{
+margin-top:12px;
+font-size:.95rem;
+line-height:1.9;
+white-space:pre-line;
 }
 
-#no{
-right:0;
-background:white;
-color:#ff4fa3;
+/* ======================================================= */
+/* BUTTONS */
+/* ======================================================= */
+.actions{margin-top:24px;display:flex;flex-direction:column;gap:12px;}
+
+.btn{
+padding:14px 18px;
+border-radius:50px;
+border:1px solid #fff;
+background:transparent;
+color:#fff;
+cursor:pointer;
+position:relative;
+overflow:hidden;
+transition:.35s;
 }
 
-button:hover{transform:scale(1.1);} 
-
-/* ===================================================== */
-/* BUTTON FUN ANIMATIONS */
-/* ===================================================== */
-.grow{animation:growBounce .4s ease;}
-.shrink{animation:shrinkBounce .4s ease;}
-.shake{animation:shake .5s;}
-
-@keyframes growBounce{
-0%{transform:scale(1);} 
-50%{transform:scale(1.35);} 
-100%{transform:scale(1.2);} 
+.btn::before{
+content:"";
+position:absolute;
+inset:0;
+background:#fff;
+transform:scaleX(0);
+transform-origin:left;
+transition:.35s;
+z-index:-1;
 }
 
-@keyframes shrinkBounce{
-0%{transform:scale(1);} 
-50%{transform:scale(.6);} 
-100%{transform:scale(.75);} 
+.btn:hover{color:#000;}
+.btn:hover::before{transform:scaleX(1);} 
+
+/* ======================================================= */
+/* SPOTIFY GIFT CARD */
+/* ======================================================= */
+.musicGift{
+margin-top:20px;
+border:1px solid rgba(255,255,255,0.4);
+border-radius:18px;
+padding:14px;
 }
 
-@keyframes shake{
-0%,100%{transform:translateX(0);} 
-25%{transform:translateX(-6px);} 
-75%{transform:translateX(6px);} 
+.musicTitle{
+font-size:.85rem;
+opacity:.7;
+margin-bottom:10px;
 }
 
-/* ===================================================== */
-/* LOVE SCENE */
-/* ===================================================== */
-#loveScene{
-position:fixed;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;
-text-align:center;padding:40px;opacity:0;pointer-events:none;transition:1s;
-background:radial-gradient(circle,#ff7ec4,#ff4fa3);color:white;
+.musicFrame{
+width:100%;
+height:80px;
+border:none;
+border-radius:12px;
 }
 
-#loveScene.active{opacity:1;pointer-events:auto;}
+/* ======================================================= */
+/* LOVE LIST */
+/* ======================================================= */
+.loveList{margin-top:20px;font-size:.85rem;opacity:.75;line-height:1.7;}
 
-.loveTitle{font-family:'Great Vibes',cursive;font-size:3.8rem;animation:fadeUp 1.5s ease;}
-.loveLetter{max-width:500px;margin-top:25px;line-height:1.9;font-size:1.1rem;animation:fadeUp 2s ease;}
-
-@keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
-
-.meterBox{width:380px;height:30px;border-radius:20px;background:rgba(255,255,255,.4);margin-top:30px;overflow:hidden;}
-.meterFill{height:100%;width:0;background:linear-gradient(90deg,#ff0066,#ffd1e8);transition:2s;}
-
-.actionPanel{margin-top:35px;display:flex;flex-direction:column;align-items:center;gap:15px;}
-
-.centerBtn{
-padding:14px 40px;border:none;border-radius:35px;background:white;color:#ff4fa3;
-font-size:17px;font-weight:600;cursor:pointer;box-shadow:0 12px 25px rgba(0,0,0,.25);
-transition:.3s;
+/* ======================================================= */
+/* MODAL */
+/* ======================================================= */
+.overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.9);
+display:flex;
+justify-content:center;
+align-items:center;
+opacity:0;
+pointer-events:none;
+transition:.4s;
+padding:20px;
 }
-.centerBtn:hover{transform:scale(1.1);} 
+.overlay.show{opacity:1;pointer-events:auto;}
 
-.secretBackdrop{position:fixed;inset:0;background:rgba(0,0,0,.45);backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:.4s;}
-.secretBackdrop.show{opacity:1;pointer-events:auto;}
-
-.secretModal{
-position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(.7);
-width:360px;padding:40px;border-radius:25px;background:white;color:#ff4fa3;
-text-align:center;font-size:1.2rem;box-shadow:0 40px 80px rgba(0,0,0,.35);
-opacity:0;pointer-events:none;transition:.4s;
+.modal{
+width:100%;
+max-width:340px;
+background:#111;
+border:1px solid #fff;
+border-radius:22px;
+padding:26px;
+text-align:center;
+animation:pop .5s ease;
 }
-.secretModal.show{opacity:1;transform:translate(-50%,-50%) scale(1);pointer-events:auto;}
 
-.heart{position:fixed;font-size:24px;animation:float 7s linear forwards;pointer-events:none;}
-@keyframes float{from{transform:translateY(0);opacity:1;}to{transform:translateY(-120vh);opacity:0;}}
+@keyframes pop{from{transform:scale(.6);}to{transform:scale(1);} }
 
-.petal{position:fixed;font-size:18px;animation:petalFall linear forwards;pointer-events:none;}
-@keyframes petalFall{0%{transform:translateY(-20px) rotate(0);opacity:1;}100%{transform:translateY(110vh) rotate(360deg);opacity:0;}}
+/* ======================================================= */
+/* STAR CANVAS */
+/* ======================================================= */
+canvas{
+position:fixed;
+inset:0;
+z-index:-1;
+}
 
-.sparkle{position:fixed;width:6px;height:6px;border-radius:50%;background:white;animation:spark 2s linear forwards;pointer-events:none;}
-@keyframes spark{from{transform:scale(0);opacity:1;}to{transform:scale(2);opacity:0;}}
+/* ======================================================= */
+/* FLOATING HEARTS */
+/* ======================================================= */
+.heart{position:fixed;animation:floatUp linear forwards;pointer-events:none;}
+@keyframes floatUp{0%{transform:translateY(0) scale(.5);opacity:1;}100%{transform:translateY(-120vh) scale(1.6);opacity:0;}}
 
-.bigHeart{font-size:60px;animation:beat 1.2s infinite;margin-top:20px;}
-@keyframes beat{0%,100%{transform:scale(1);}50%{transform:scale(1.2);}}
+/* ======================================================= */
+/* SHOOTING STAR */
+/* ======================================================= */
+.shoot{
+position:fixed;
+width:2px;
+height:120px;
+background:linear-gradient(white,transparent);
+animation:shoot 1s linear forwards;
+}
+
+@keyframes shoot{
+from{transform:translate(0,0) rotate(45deg);opacity:1;}
+to{transform:translate(-600px,600px) rotate(45deg);opacity:0;}
+}
 
 </style>
 </head>
 <body>
 
+<div id="enterScreen">
+<div class="enterTitle">For My Queen 🖤</div>
+<div class="enterSub">Tap to enter your birthday universe ✨</div>
+</div>
+
 <canvas id="stars"></canvas>
 
-<audio id="music" loop preload="auto">
-<source src="harrypotter.mp3" type="audio/mpeg">
-</audio>
+<div class="app">
+<div class="card">
 
-<div id="startScreen">
-<h1>Enter Our Magical World ✨</h1>
-<p>Tap anywhere...</p>
+<div class="title">Happy Birthday My Queen 🖤</div>
+<div class="subtitle">You are the universe in human form ✨</div>
+
+<div class="heroHeart">🤍</div>
+
+<div class="poem">
+In the silence of midnight skies,
+Your soul is where my universe lies.
+
+Black like space, endless and deep,
+White like stars that never sleep.
+
+You are calm in every storm,
+The warmth in every quiet form.
+
+If eternity had a heartbeat —
+It would sound exactly like you.
+
+Happy Birthday.
+My always.
+My forever.
+My Queen. 🖤🤍
 </div>
 
-<div class="card" id="card">
-<h2>Will You Be My Valentine Kalp-u Queen 💖</h2>
-<div class="buttons">
-<button id="yes">Yes 💕✨</button>
-<button id="no">No 🥺💔</button>
+<div class="actions">
+<button class="btn" id="loveBtn">Release Love Into The Sky 🤍</button>
+<button class="btn" id="starsBtn">Create Shooting Star 🌠</button>
+<button class="btn" id="msgBtn">Open My Heart 🖤</button>
+</div>
+
+<!-- ======================================================= -->
+<!-- SPOTIFY SONG GIFT -->
+<!-- Replace src link with your Pattuma Spotify embed link -->
+<!-- ======================================================= -->
+<div class="musicGift">
+<div class="musicTitle">A song gift for you 🎵</div>
+<iframe class="musicFrame"
+src="https://open.spotify.com/embed/track/PUT_YOUR_SPOTIFY_TRACK_ID_HERE"
+allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+</iframe>
+</div>
+
+<div class="loveList">
+Things I adore about you…
+Your smile.
+Your voice.
+Your kindness.
+Your strength.
+Your dreams.
+Your heart.
+Your soul.
+Everything.
+</div>
+
 </div>
 </div>
 
-<div id="loveScene">
-<div class="loveTitle">Forever With You 💖</div>
-<div class="bigHeart">💗</div>
+<div class="overlay" id="overlay">
+<div class="modal">
+You are not just special.
+You are once‑in‑a‑lifetime rare.
 
-<div class="loveLetter">
-You are the magic that makes my world shine brighter,
-the warmth that fills every quiet moment,
-the dream I never want to wake from.
-With you… life feels like a beautiful story I never want to end.
+Happy Birthday… my heart. 🤍
 </div>
-
-<div class="meterBox"><div class="meterFill" id="meter"></div></div>
-
-<div class="actionPanel">
-<button class="centerBtn" id="secretBtn">Special Message 💌</button>
-</div>
-</div>
-
-<div class="secretBackdrop" id="secretBackdrop"></div>
-<div class="secretModal" id="secretModal">
-You are the most beautiful chapter of my life ❤️
 </div>
 
 <script>
-const startScreen=document.getElementById('startScreen');
-const card=document.getElementById('card');
-const loveScene=document.getElementById('loveScene');
-const yesBtn=document.getElementById('yes');
-const noBtn=document.getElementById('no');
-const meter=document.getElementById('meter');
-const secretBtn=document.getElementById('secretBtn');
-const secretModal=document.getElementById('secretModal');
-const secretBackdrop=document.getElementById('secretBackdrop');
 
-let heartsRunning=false;
-let yesScale=1;
-let noScale=1;
-
-/* ENTER EXPERIENCE */
-startScreen.onclick=async()=>{
-try{await document.documentElement.requestFullscreen();}catch{}
-startScreen.style.display='none';
-card.classList.add('show');
+/* ENTER FULLSCREEN */
+document.getElementById('enterScreen').onclick=async()=>{
+try{await document.documentElement.requestFullscreen();}catch(e){}
+document.getElementById('enterScreen').style.display='none';
 }
 
-/* NO BUTTON ESCAPE */
-noBtn.onmouseover=()=>{
-noBtn.style.left=Math.random()*250+'px';
-noBtn.style.top=Math.random()*40+'px';
-}
-
-/* WHEN NO CLICKED → SHRINK + YES GROW */
-noBtn.onclick=()=>{
-
-// update scale values
-yesScale+=0.25;
-noScale-=0.15;
-
-if(noScale<0.45) noScale=0.45;
-
-// apply transform
-yesBtn.style.transform=`scale(${yesScale})`;
-noBtn.style.transform=`scale(${noScale})`;
-
-// animation classes
-yesBtn.classList.add('grow');
-noBtn.classList.add('shrink');
-noBtn.classList.add('shake');
-
-// cute emoji change
-noBtn.innerHTML="No 😭💔";
-yesBtn.innerHTML="Yes 😍💖✨";
-
-// remove animation classes after play
-setTimeout(()=>{
-yesBtn.classList.remove('grow');
-noBtn.classList.remove('shrink');
-noBtn.classList.remove('shake');
-},400);
-}
-
-/* YES CLICK MAGIC */
-yesBtn.onclick=()=>{
-card.style.display='none';
-loveScene.classList.add('active');
-startHearts();
-startSparkles();
-startPetals();
-fillMeter();
-}
-
-/* LOVE METER */
-function fillMeter(){
-let v=0;
-const i=setInterval(()=>{
-v+=1;
-meter.style.width=v+'%';
-if(v>=100) clearInterval(i);
-},25);
-}
-
-/* HEARTS */
-function startHearts(){
-if(heartsRunning) return;
-heartsRunning=true;
-setInterval(()=>{
-const h=document.createElement('div');
-h.className='heart';
-h.innerHTML='💖';
-h.style.left=Math.random()*100+'vw';
-h.style.fontSize=(20+Math.random()*30)+'px';
-document.body.appendChild(h);
-setTimeout(()=>h.remove(),7000);
-},250);
-}
-
-/* SPARKLES */
-function startSparkles(){
-setInterval(()=>{
-const s=document.createElement('div');
-s.className='sparkle';
-s.style.left=Math.random()*100+'vw';
-s.style.top=Math.random()*100+'vh';
-document.body.appendChild(s);
-setTimeout(()=>s.remove(),2000);
-},120);
-}
-
-/* ROSE PETALS */
-function startPetals(){
-setInterval(()=>{
-const p=document.createElement('div');
-p.className='petal';
-p.innerHTML='🌹';
-p.style.left=Math.random()*100+'vw';
-p.style.animationDuration=(4+Math.random()*4)+'s';
-document.body.appendChild(p);
-setTimeout(()=>p.remove(),8000);
-},300);
-}
-
-/* SECRET MODAL */
-secretBtn.onclick=()=>{
-secretModal.classList.toggle('show');
-secretBackdrop.classList.toggle('show');
-}
-
-secretBackdrop.onclick=()=>{
-secretModal.classList.remove('show');
-secretBackdrop.classList.remove('show');
-}
-
-/* STARFIELD */
+/* ======================================================= */
+/* REAL STARFIELD */
+/* ======================================================= */
 const canvas=document.getElementById('stars');
 const ctx=canvas.getContext('2d');
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
+
+function resize(){canvas.width=innerWidth;canvas.height=innerHeight;}
+resize();addEventListener('resize',resize);
 
 const stars=[];
-for(let i=0;i<200;i++){
-stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2});
+for(let i=0;i<500;i++){
+stars.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*1.8,
+blink:Math.random()*0.02
+});
 }
 
-function drawStars(){
+function draw(){
 ctx.clearRect(0,0,canvas.width,canvas.height);
 stars.forEach(s=>{
+s.r+=s.blink;
+if(s.r>2||s.r<0.3)s.blink*=-1;
 ctx.beginPath();
 ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
 ctx.fillStyle='white';
 ctx.fill();
 });
-requestAnimationFrame(drawStars);
+requestAnimationFrame(draw);
+}
+draw();
+
+/* ======================================================= */
+/* SHOOTING STAR */
+/* ======================================================= */
+document.getElementById('starsBtn').onclick=()=>{
+const s=document.createElement('div');
+s.className='shoot';
+s.style.top=Math.random()*200+'px';
+s.style.left=Math.random()*window.innerWidth+'px';
+document.body.appendChild(s);
+setTimeout(()=>s.remove(),1000);
 }
 
-drawStars();
+/* ======================================================= */
+/* LOVE BURST */
+/* ======================================================= */
+document.getElementById('loveBtn').onclick=()=>{
+for(let i=0;i<40;i++){
+const h=document.createElement('div');
+h.className='heart';
+h.innerHTML=Math.random()>.5?'🤍':'🖤';
+h.style.left=Math.random()*100+'vw';
+h.style.fontSize=(18+Math.random()*30)+'px';
+h.style.animationDuration=(4+Math.random()*3)+'s';
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),7000);
+}
+}
+
+/* MODAL */
+const overlay=document.getElementById('overlay');
+document.getElementById('msgBtn').onclick=()=>overlay.classList.toggle('show');
+overlay.onclick=()=>overlay.classList.remove('show');
 
 </script>
 </body>
