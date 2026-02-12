@@ -38,7 +38,7 @@ justify-content:center;
 align-items:center;
 flex-direction:column;
 color:white;
-z-index:1000;
+z-index:2000;
 cursor:pointer;
 text-align:center;
 }
@@ -128,6 +128,7 @@ color:white;
 opacity:0;
 pointer-events:none;
 transition:1s;
+z-index:1500;
 }
 
 #overlay.active{
@@ -156,6 +157,7 @@ position:fixed;
 color:#ff2e7a;
 animation:floatUp linear forwards;
 pointer-events:none;
+z-index:1400;
 }
 
 @keyframes floatUp{
@@ -170,8 +172,8 @@ pointer-events:none;
 position:fixed;
 width:10px;
 height:10px;
-background:red;
 animation:confettiFall linear forwards;
+z-index:1400;
 }
 
 @keyframes confettiFall{
@@ -237,6 +239,10 @@ height:80px;
 background:rgba(255,255,255,0.4);
 border-radius:15px;
 animation:pop 0.6s ease;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:30px;
 }
 
 @keyframes pop{
@@ -249,11 +255,17 @@ to{transform:scale(1);}
 <body>
 
 <!-- ===================================================== -->
+<!-- HARRY POTTER MUSIC (ADD YOUR OWN FILE) -->
+<!-- Put harrypotter.mp3 in same folder -->
+<!-- ===================================================== -->
+<audio id="bgMusic" src="harrypotter.mp3" loop></audio>
+
+<!-- ===================================================== -->
 <!-- START SCREEN -->
 <!-- ===================================================== -->
 <div id="startScreen">
 <h1>Tap to Enter 💗</h1>
-<p>The most special surprise awaits you...</p>
+<p>The most magical surprise awaits you...</p>
 </div>
 
 <!-- ===================================================== -->
@@ -306,11 +318,11 @@ const loveMeter=document.getElementById("loveMeter");
 const typewriter=document.getElementById("typewriter");
 const secretBtn=document.getElementById("secretBtn");
 const gallery=document.getElementById("gallery");
+const music=document.getElementById("bgMusic");
 
-let audioCtx;
-let interval;
-let yesScale=1;
-let noScale=1;
+let heartsInterval=null;
+let typeInterval=null;
+let yesClicked=false;
 
 /* ===================================================== */
 /* ENTER EXPERIENCE */
@@ -321,92 +333,43 @@ await document.documentElement.requestFullscreen();
 }
 startScreen.style.display="none";
 mainCard.classList.add("show");
-startMusic();
+music.volume=0.6;
+music.play().catch(()=>{});
 });
-
-/* ===================================================== */
-/* ROMANTIC MUSIC (RICH HARMONY) */
-/* ===================================================== */
-function startMusic(){
-audioCtx=new (window.AudioContext||window.webkitAudioContext)();
-
-const chords=[
-[261,329,392],
-[294,370,440],
-[329,415,523],
-[392,494,587],
-[349,440,523],
-[329,392,523]
-];
-
-let index=0;
-
-interval=setInterval(()=>{
-playChord(chords[index]);
-index=(index+1)%chords.length;
-},1500);
-}
-
-function playChord(notes){
-notes.forEach((freq,i)=>{
-const osc=audioCtx.createOscillator();
-const gain=audioCtx.createGain();
-osc.type="sine";
-osc.frequency.value=freq;
-
-const lfo=audioCtx.createOscillator();
-const lfoGain=audioCtx.createGain();
-
-lfo.frequency.value=5;
-lfoGain.gain.value=5;
-
-lfo.connect(lfoGain);
-lfoGain.connect(osc.frequency);
-
-osc.connect(gain);
-gain.connect(audioCtx.destination);
-
-osc.start(audioCtx.currentTime+i*0.1);
-lfo.start(audioCtx.currentTime);
-
-osc.stop(audioCtx.currentTime+1.4);
-lfo.stop(audioCtx.currentTime+1.4);
-});
-}
 
 /* ===================================================== */
 /* NO BUTTON BEHAVIOUR */
 /* ===================================================== */
 noBtn.addEventListener("mouseover",()=>{
-noBtn.style.top=Math.random()*60+"px";
-noBtn.style.left=Math.random()*60+"%";
-});
-
-noBtn.addEventListener("click",()=>{
-yesScale+=0.25;
-noScale-=0.1;
-yesBtn.style.transform="scale("+yesScale+")";
-noBtn.style.transform="scale("+Math.max(noScale,0.5)+")";
+const x=Math.random()*70;
+const y=Math.random()*50;
+noBtn.style.left=x+"%";
+noBtn.style.top=y+"px";
 });
 
 /* ===================================================== */
 /* YES CLICK MAGIC */
 /* ===================================================== */
 yesBtn.addEventListener("click",()=>{
-mainCard.style.opacity="0";
+if(yesClicked) return;
+yesClicked=true;
+
+mainCard.style.display="none";
+
 launchHearts();
 launchConfetti();
-setTimeout(()=>overlay.classList.add("active"),600);
-setTimeout(()=>fillLoveMeter(),1200);
-setTimeout(()=>startTypewriter(),2000);
-setTimeout(()=>generateGallery(),3000);
+
+setTimeout(()=>overlay.classList.add("active"),500);
+setTimeout(fillLoveMeter,1000);
+setTimeout(startTypewriter,1500);
+setTimeout(generateGallery,2000);
 });
 
 /* ===================================================== */
 /* HEARTS */
 /* ===================================================== */
 function launchHearts(){
-setInterval(()=>{
+heartsInterval=setInterval(()=>{
 const heart=document.createElement("div");
 heart.className="heart";
 heart.innerHTML="💖";
@@ -415,7 +378,7 @@ heart.style.fontSize=(20+Math.random()*30)+"px";
 heart.style.animationDuration=(4+Math.random()*3)+"s";
 document.body.appendChild(heart);
 setTimeout(()=>heart.remove(),7000);
-},200);
+},250);
 }
 
 /* ===================================================== */
@@ -441,7 +404,7 @@ let value=0;
 const meter=setInterval(()=>{
 value+=2;
 loveMeter.style.width=value+"%";
-if(value>=100)clearInterval(meter);
+if(value>=100) clearInterval(meter);
 },30);
 }
 
@@ -456,44 +419,30 @@ const messages=[
 "You are my universe 🌌",
 "I fall in love with you every day 💗",
 "You are my sunshine ☀",
-"My heart chose you 💓",
-"Together is my favorite place 💕",
-"You complete me 💖",
-"I adore you endlessly 💘",
-"You are my magic ✨",
-"My heart belongs to you 💝",
-"You are my miracle 💞",
-"With you life is beautiful 🌷",
-"You are my destiny 💫",
-"My soul found yours 💗",
-"You are everything 💕",
-"Forever isn't long enough 💖",
-"I love you infinitely 💘"
+"My heart chose you 💓"
 ];
 
 let msgIndex=0;
 let charIndex=0;
 
 function startTypewriter(){
-setInterval(()=>{
+typeInterval=setInterval(()=>{
 typewriter.innerHTML="";
 charIndex=0;
 const current=messages[msgIndex];
 const typer=setInterval(()=>{
 typewriter.innerHTML+=current[charIndex];
 charIndex++;
-if(charIndex>=current.length)clearInterval(typer);
-},50);
+if(charIndex>=current.length) clearInterval(typer);
+},60);
 msgIndex=(msgIndex+1)%messages.length;
-},2500);
+},3000);
 }
 
 /* ===================================================== */
 /* SECRET BUTTON */
 /* ===================================================== */
 secretBtn.addEventListener("click",()=>{
-alert("You unlocked infinite love 💖💖💖\nYou are the best thing that ever happened to me!");
-launchHearts();
 launchConfetti();
 });
 
@@ -508,70 +457,6 @@ g.innerHTML="💞";
 gallery.appendChild(g);
 }
 }
-
-/* ===================================================== */
-/* EXTRA LOVE DATA (FOR SIZE & FUTURE FEATURES) */
-/* ===================================================== */
-const loveQuotes=[
-"Love is composed of a single soul inhabiting two bodies.",
-"I saw that you were perfect, and so I loved you.",
-"In all the world, there is no heart for me like yours.",
-"You are my today and all of my tomorrows.",
-"If I know what love is, it is because of you.",
-"Every love story is beautiful, but ours is my favorite.",
-"You are the finest, loveliest, tenderest person I have ever known.",
-"I wish I could turn back the clock. I'd find you sooner and love you longer.",
-"To the world you may be one person, but to one person you are the world.",
-"You are my heart, my life, my one and only thought.",
-"I need you like a heart needs a beat.",
-"You are my paradise.",
-"When I follow my heart it leads me to you.",
-"You make me want to be a better person.",
-"You are my greatest adventure.",
-"My favorite sound is your voice.",
-"You are the reason I smile.",
-"Love is not finding someone to live with, it's finding someone you can't live without.",
-"I choose you. And I'll choose you over and over.",
-"You make ordinary moments magical.",
-"My heart beats for you.",
-"You are my happy place.",
-"You are my forever and always.",
-"With you every moment is special.",
-"You are my favorite hello and hardest goodbye.",
-"I love you more than words can express.",
-"You are my sweetest dream.",
-"You are my shining star.",
-"You are my moonlight.",
-"You are my melody.",
-"You are my poetry.",
-"You are my heartbeat.",
-"You are my world.",
-"You are my everything.",
-"You are my endless love.",
-"You are my greatest blessing.",
-"You are my miracle.",
-"You are my home.",
-"You are my peace.",
-"You are my joy.",
-"You are my life.",
-"You are my soulmate.",
-"You are my forever.",
-"You are my always.",
-"You are my destiny.",
-"You are my universe.",
-"You are my light.",
-"You are my warmth.",
-"You are my dream.",
-"You are my love.",
-"You are my heart.",
-"You are my happiness.",
-"You are my reason.",
-"You are my inspiration.",
-"You are my magic.",
-"You are my hope.",
-"You are my future.",
-"You are my everything forever."
-];
 
 </script>
 </body>
