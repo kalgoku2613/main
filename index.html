@@ -3,110 +3,110 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For The One 💗</title>
+<title>For My Love 💗</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
 
 body{
 height:100vh;
-overflow:hidden;
+background:linear-gradient(160deg,#ffe6f2,#ffcce6,#ff99cc);
 display:flex;
 justify-content:center;
 align-items:center;
-background:radial-gradient(circle at 20% 20%,#ff7eb9,#ff65a3,#7a00ff);
-background-size:200% 200%;
-animation:bgShift 12s ease infinite alternate;
+overflow:hidden;
 }
 
-@keyframes bgShift{
-0%{background-position:0% 0%;}
-100%{background-position:100% 100%;}
-}
-
-/* Floating particles */
-.particle{
-position:absolute;
-width:6px;
-height:6px;
-background:white;
-border-radius:50%;
-opacity:0.5;
-animation:float 10s linear infinite;
-}
-
-@keyframes float{
-0%{transform:translateY(100vh);}
-100%{transform:translateY(-10vh);}
-}
-
-/* Glass Card */
-.card{
-width:420px;
-padding:45px;
-background:rgba(255,255,255,0.15);
-backdrop-filter:blur(25px);
-border-radius:30px;
-box-shadow:0 30px 80px rgba(0,0,0,0.3);
+/* Start Screen */
+#startScreen{
+position:fixed;
+width:100%;
+height:100%;
+background:linear-gradient(160deg,#ff66b2,#ff4fa3);
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+color:white;
+z-index:10;
+cursor:pointer;
 text-align:center;
-transition:0.8s;
+}
+
+#startScreen h1{
+font-size:2rem;
+animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+0%,100%{transform:scale(1);}
+50%{transform:scale(1.05);}
+}
+
+/* Main Card */
+.card{
+width:90%;
+max-width:420px;
+background:rgba(255,255,255,0.35);
+backdrop-filter:blur(15px);
+padding:35px 25px;
+border-radius:25px;
+box-shadow:0 20px 50px rgba(0,0,0,0.15);
+text-align:center;
+transition:0.6s;
+opacity:0;
 }
 
 h2{
-color:white;
-font-size:1.9rem;
-margin-bottom:35px;
-letter-spacing:1px;
+color:#c2185b;
+margin-bottom:30px;
 }
 
-/* Buttons */
 .buttons{
 position:relative;
-height:120px;
+height:90px;
 }
 
 button{
-position:absolute;
-width:140px;
-height:55px;
+width:120px;
+height:50px;
 border:none;
-border-radius:40px;
+border-radius:30px;
+position:absolute;
+font-size:16px;
 cursor:pointer;
-font-size:18px;
 transition:0.3s ease;
 }
 
 #yes{
-background:linear-gradient(45deg,#ff2d8a,#ff0066);
+background:#ff4fa3;
 color:white;
-left:12%;
-box-shadow:0 15px 30px rgba(255,0,100,0.5);
+left:15%;
+box-shadow:0 8px 20px rgba(255,79,163,0.4);
 }
 
 #no{
 background:white;
-color:#ff0066;
-right:12%;
+color:#ff4fa3;
+right:15%;
 }
 
 /* Overlay */
 #overlay{
 position:fixed;
-top:0;
-left:0;
 width:100%;
 height:100%;
+background:linear-gradient(160deg,#ff4fa3,#ff85c1);
 display:flex;
+flex-direction:column;
 justify-content:center;
 align-items:center;
-flex-direction:column;
-background:linear-gradient(160deg,#ff0066,#ff66cc);
+text-align:center;
+padding:30px;
+color:white;
 opacity:0;
 pointer-events:none;
-transition:1s;
-color:white;
-text-align:center;
-padding:40px;
+transition:0.8s;
 }
 
 #overlay.active{
@@ -114,31 +114,23 @@ opacity:1;
 pointer-events:auto;
 }
 
-#loveText{
-max-width:500px;
-font-size:1.3rem;
-line-height:1.8;
-margin-top:30px;
-white-space:pre-line;
+.letter{
+font-size:1rem;
+line-height:1.7;
+max-width:320px;
+margin-top:20px;
 }
-
-.bigTitle{
-font-size:3rem;
-animation:pop 1s ease forwards;
-}
-
-@keyframes pop{
-from{transform:scale(0);}
-to{transform:scale(1);}
-}
-
 </style>
 </head>
-
 <body>
 
-<div class="card" id="card">
-<h2>Will You Be My Valentine?</h2>
+<div id="startScreen">
+<h1>Tap to Enter 💗</h1>
+<p>Something beautiful awaits...</p>
+</div>
+
+<div class="card" id="mainCard">
+<h2>Will You Be My Valentine? 💗</h2>
 <div class="buttons">
 <button id="yes">Yes 💕</button>
 <button id="no">No 🥺</button>
@@ -146,104 +138,86 @@ to{transform:scale(1);}
 </div>
 
 <div id="overlay">
-<div class="bigTitle">You Said Yes 💖</div>
-<div id="loveText"></div>
+<h2>Forever With You 💖</h2>
+<div class="letter">
+My love,  
+You are my peace and my happiness.  
+With you, life feels brighter and softer.  
+I don’t just want today —  
+I want every tomorrow with you. 💕
+</div>
 </div>
 
 <script>
-const yes=document.getElementById("yes");
-const no=document.getElementById("no");
+const startScreen=document.getElementById("startScreen");
+const mainCard=document.getElementById("mainCard");
+const yesBtn=document.getElementById("yes");
+const noBtn=document.getElementById("no");
 const overlay=document.getElementById("overlay");
-const card=document.getElementById("card");
-const loveText=document.getElementById("loveText");
 
-let yesScale=1;
-
-/* Romantic Arcade Music 2+ mins */
 let audioCtx;
-let musicInterval;
+let interval;
+let yesScale=1;
+let noScale=1;
 
-document.body.addEventListener("click",()=>{
-if(!audioCtx){
-audioCtx=new(window.AudioContext||window.webkitAudioContext)();
-audioCtx.resume();
+/* Enter Fullscreen + Start Music */
+startScreen.addEventListener("click", async ()=>{
+if(document.documentElement.requestFullscreen){
+await document.documentElement.requestFullscreen();
+}
+startScreen.style.display="none";
+mainCard.style.opacity="1";
 startMusic();
-}
-},{once:true});
-
-function startMusic(){
-const melody=[523,659,784,880,784,659,523,494];
-let index=0;
-musicInterval=setInterval(()=>{
-const osc=audioCtx.createOscillator();
-const gain=audioCtx.createGain();
-osc.type="square";
-osc.frequency.value=melody[index];
-gain.gain.setValueAtTime(0.12,audioCtx.currentTime);
-gain.gain.exponentialRampToValueAtTime(0.001,audioCtx.currentTime+0.3);
-osc.connect(gain);
-gain.connect(audioCtx.destination);
-osc.start();
-osc.stop(audioCtx.currentTime+0.3);
-index=(index+1)%melody.length;
-},300);
-}
-
-/* NO Button Smart Escape */
-no.addEventListener("mouseenter",()=>{
-const padding=150;
-const maxX=window.innerWidth-padding;
-const maxY=window.innerHeight-padding;
-const x=Math.random()*maxX;
-const y=Math.random()*maxY;
-no.style.position="fixed";
-no.style.left=x+"px";
-no.style.top=y+"px";
-no.style.transform="rotate("+Math.random()*30+"deg)";
 });
 
-/* YES grows with passion */
-no.addEventListener("click",()=>{
-yesScale+=0.25;
-yes.style.transform="scale("+yesScale+")";
+/* Stronger Romantic Music */
+function startMusic(){
+audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+
+const progression=[
+[261,329,392],
+[294,370,440],
+[329,415,523],
+[261,392,523]
+];
+
+let index=0;
+
+interval=setInterval(()=>{
+playChord(progression[index]);
+index=(index+1)%progression.length;
+},1800);
+}
+
+function playChord(notes){
+notes.forEach((freq,i)=>{
+const osc=audioCtx.createOscillator();
+const gain=audioCtx.createGain();
+osc.type="triangle";
+osc.frequency.value=freq;
+gain.gain.value=0.06;
+osc.connect(gain);
+gain.connect(audioCtx.destination);
+osc.start(audioCtx.currentTime+i*0.15);
+osc.stop(audioCtx.currentTime+1.5);
+});
+}
+
+/* YES grows when NO clicked */
+noBtn.addEventListener("click",()=>{
+yesScale+=0.2;
+noScale-=0.1;
+yesBtn.style.transform="scale("+yesScale+")";
+noBtn.style.transform="scale("+Math.max(noScale,0.5)+")";
 });
 
 /* YES click */
-yes.addEventListener("click",()=>{
-card.style.transform="scale(0)";
+yesBtn.addEventListener("click",()=>{
+mainCard.style.opacity="0";
 setTimeout(()=>{
 overlay.classList.add("active");
-typeLove();
-},600);
+},500);
 });
-
-/* Typewriter Romantic Message */
-function typeLove(){
-const message=
-"I don’t want a moment.\n\nI want a lifetime.\n\n" +
-"Not just smiles… but storms, growth, silence, and dreams.\n\n" +
-"You are not just my choice.\n\nYou are my certainty.\n\n" +
-"And if love is a journey —\n\nI choose every road with you.";
-
-let i=0;
-function typing(){
-if(i<message.length){
-loveText.textContent+=message.charAt(i);
-i++;
-setTimeout(typing,35);
-}
-}
-typing();
-}
-
-/* Floating background particles */
-for(let i=0;i<40;i++){
-const p=document.createElement("div");
-p.className="particle";
-p.style.left=Math.random()*100+"vw";
-p.style.animationDuration=(Math.random()*5+5)+"s";
-document.body.appendChild(p);
-}
 </script>
 
 </body>
