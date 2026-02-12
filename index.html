@@ -20,152 +20,169 @@ justify-content:center;
 align-items:center;
 }
 
+/* ===================================================== */
+/* BACKGROUND GLOW */
+/* ===================================================== */
 body::before{
 content:"";
 position:fixed;
 inset:0;
 background:radial-gradient(circle at 70% 80%,rgba(255,255,255,0.5),transparent 40%);
-animation:glowMove 10s infinite alternate;
-z-index:-1;
+animation:glowMove 12s infinite alternate;
+z-index:-2;
 }
 
 @keyframes glowMove{
 from{transform:translate(0,0);} 
-to{transform:translate(-40px,-30px);} 
+to{transform:translate(-60px,-40px);} 
 }
 
-/* ================= START SCREEN ================= */
+#stars{position:fixed;inset:0;z-index:-1;}
+
+/* ===================================================== */
+/* START SCREEN */
+/* ===================================================== */
 #startScreen{
-position:fixed;
-inset:0;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
+position:fixed;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;
 background:linear-gradient(135deg,#ff4fa3,#ff7ec4,#ffc1e3);
-color:white;
-z-index:9999;
-cursor:pointer;
-text-align:center;
+color:white;z-index:9999;cursor:pointer;text-align:center;
 }
 
 #startScreen h1{
 font-family:'Great Vibes',cursive;
-font-size:3rem;
+font-size:3.3rem;
 animation:pulse 2s infinite;
 }
 
-#startScreen p{margin-top:10px;opacity:.9;}
+#startScreen p{margin-top:12px;opacity:.9;font-size:1.1rem;}
 
-@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.08);}}
+@keyframes pulse{
+0%,100%{transform:scale(1);} 
+50%{transform:scale(1.1);} 
+}
 
-/* ================= MAIN CARD ================= */
+/* ===================================================== */
+/* MAIN CARD */
+/* ===================================================== */
 .card{
-width:420px;
-padding:45px 30px;
-border-radius:30px;
-background:rgba(255,255,255,0.35);
-backdrop-filter:blur(25px);
-box-shadow:0 40px 80px rgba(0,0,0,.2);
-text-align:center;
-transform:scale(.85);
-opacity:0;
-transition:1s;
+width:440px;padding:50px 35px;border-radius:30px;background:rgba(255,255,255,0.35);
+backdrop-filter:blur(25px);box-shadow:0 40px 80px rgba(0,0,0,.2);
+text-align:center;transform:scale(.85);opacity:0;transition:1s;
 }
 
 .card.show{opacity:1;transform:scale(1);}
 
 .card h2{
 font-family:'Great Vibes',cursive;
-font-size:2.3rem;
+font-size:2.6rem;
 color:#c2185b;
 margin-bottom:40px;
 }
 
-.buttons{position:relative;height:80px;}
+.buttons{position:relative;height:90px;}
 
 button{
-width:140px;height:55px;border:none;border-radius:30px;
-font-size:17px;cursor:pointer;position:absolute;
-transition:.3s;font-weight:600;
+width:150px;height:58px;border:none;border-radius:30px;font-size:18px;
+cursor:pointer;position:absolute;transition:.3s;font-weight:600;
+display:flex;align-items:center;justify-content:center;gap:6px;
 }
 
-#yes{left:0;background:#ff4fa3;color:white;box-shadow:0 15px 30px rgba(255,79,163,.5);} 
-#no{right:0;background:white;color:#ff4fa3;}
+#yes{
+left:0;
+background:#ff4fa3;
+color:white;
+box-shadow:0 15px 30px rgba(255,79,163,.5);
+}
+
+#no{
+right:0;
+background:white;
+color:#ff4fa3;
+}
+
 button:hover{transform:scale(1.1);} 
 
-/* ================= LOVE SCENE ================= */
+/* ===================================================== */
+/* BUTTON FUN ANIMATIONS */
+/* ===================================================== */
+.grow{animation:growBounce .4s ease;}
+.shrink{animation:shrinkBounce .4s ease;}
+.shake{animation:shake .5s;}
+
+@keyframes growBounce{
+0%{transform:scale(1);} 
+50%{transform:scale(1.35);} 
+100%{transform:scale(1.2);} 
+}
+
+@keyframes shrinkBounce{
+0%{transform:scale(1);} 
+50%{transform:scale(.6);} 
+100%{transform:scale(.75);} 
+}
+
+@keyframes shake{
+0%,100%{transform:translateX(0);} 
+25%{transform:translateX(-6px);} 
+75%{transform:translateX(6px);} 
+}
+
+/* ===================================================== */
+/* LOVE SCENE */
+/* ===================================================== */
 #loveScene{
-position:fixed;inset:0;
-display:flex;flex-direction:column;justify-content:center;align-items:center;
-text-align:center;padding:40px;
-opacity:0;pointer-events:none;transition:1s;
-background:radial-gradient(circle,#ff7ec4,#ff4fa3);
-color:white;
+position:fixed;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;
+text-align:center;padding:40px;opacity:0;pointer-events:none;transition:1s;
+background:radial-gradient(circle,#ff7ec4,#ff4fa3);color:white;
 }
 
 #loveScene.active{opacity:1;pointer-events:auto;}
 
-.loveTitle{font-family:'Great Vibes',cursive;font-size:3.5rem;animation:fadeUp 1.5s ease;}
-.loveLetter{max-width:450px;margin-top:20px;line-height:1.8;animation:fadeUp 2s ease;}
+.loveTitle{font-family:'Great Vibes',cursive;font-size:3.8rem;animation:fadeUp 1.5s ease;}
+.loveLetter{max-width:500px;margin-top:25px;line-height:1.9;font-size:1.1rem;animation:fadeUp 2s ease;}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
 
-/* ================= LOVE METER ================= */
-.meterBox{width:350px;height:28px;border-radius:20px;background:rgba(255,255,255,.4);margin-top:25px;overflow:hidden;}
+.meterBox{width:380px;height:30px;border-radius:20px;background:rgba(255,255,255,.4);margin-top:30px;overflow:hidden;}
 .meterFill{height:100%;width:0;background:linear-gradient(90deg,#ff0066,#ffd1e8);transition:2s;}
 
-/* ================= SECRET MODAL CENTERED ================= */
-.secretBackdrop{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.4);
-backdrop-filter:blur(6px);
-opacity:0;
-pointer-events:none;
-transition:.4s;
-}
+.actionPanel{margin-top:35px;display:flex;flex-direction:column;align-items:center;gap:15px;}
 
-.secretBackdrop.show{
-opacity:1;
-pointer-events:auto;
+.centerBtn{
+padding:14px 40px;border:none;border-radius:35px;background:white;color:#ff4fa3;
+font-size:17px;font-weight:600;cursor:pointer;box-shadow:0 12px 25px rgba(0,0,0,.25);
+transition:.3s;
 }
+.centerBtn:hover{transform:scale(1.1);} 
+
+.secretBackdrop{position:fixed;inset:0;background:rgba(0,0,0,.45);backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:.4s;}
+.secretBackdrop.show{opacity:1;pointer-events:auto;}
 
 .secretModal{
-position:fixed;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%) scale(.8);
-width:320px;
-padding:30px;
-border-radius:25px;
-background:white;
-color:#ff4fa3;
-box-shadow:0 30px 60px rgba(0,0,0,.35);
-text-align:center;
-font-size:1.1rem;
-opacity:0;
-pointer-events:none;
-transition:.4s;
+position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(.7);
+width:360px;padding:40px;border-radius:25px;background:white;color:#ff4fa3;
+text-align:center;font-size:1.2rem;box-shadow:0 40px 80px rgba(0,0,0,.35);
+opacity:0;pointer-events:none;transition:.4s;
 }
+.secretModal.show{opacity:1;transform:translate(-50%,-50%) scale(1);pointer-events:auto;}
 
-.secretModal.show{
-opacity:1;
-transform:translate(-50%,-50%) scale(1);
-pointer-events:auto;
-}
-
-/* ================= FLOATING HEARTS ================= */
-.heart{position:fixed;font-size:22px;animation:float 6s linear forwards;pointer-events:none;}
+.heart{position:fixed;font-size:24px;animation:float 7s linear forwards;pointer-events:none;}
 @keyframes float{from{transform:translateY(0);opacity:1;}to{transform:translateY(-120vh);opacity:0;}}
 
-/* ================= MAGIC SPARKLES ================= */
+.petal{position:fixed;font-size:18px;animation:petalFall linear forwards;pointer-events:none;}
+@keyframes petalFall{0%{transform:translateY(-20px) rotate(0);opacity:1;}100%{transform:translateY(110vh) rotate(360deg);opacity:0;}}
+
 .sparkle{position:fixed;width:6px;height:6px;border-radius:50%;background:white;animation:spark 2s linear forwards;pointer-events:none;}
 @keyframes spark{from{transform:scale(0);opacity:1;}to{transform:scale(2);opacity:0;}}
+
+.bigHeart{font-size:60px;animation:beat 1.2s infinite;margin-top:20px;}
+@keyframes beat{0%,100%{transform:scale(1);}50%{transform:scale(1.2);}}
 
 </style>
 </head>
 <body>
+
+<canvas id="stars"></canvas>
 
 <audio id="music" loop preload="auto">
 <source src="harrypotter.mp3" type="audio/mpeg">
@@ -177,33 +194,32 @@ pointer-events:auto;
 </div>
 
 <div class="card" id="card">
-<h2>Will You Be My Valentine? 💖</h2>
+<h2>Will You Be My Valentine Kalp-u Queen 💖</h2>
 <div class="buttons">
-<button id="yes">Yes 💕</button>
-<button id="no">No 🥺</button>
+<button id="yes">Yes 💕✨</button>
+<button id="no">No 🥺💔</button>
 </div>
 </div>
 
 <div id="loveScene">
 <div class="loveTitle">Forever With You 💖</div>
+<div class="bigHeart">💗</div>
+
 <div class="loveLetter">
 You are the magic that makes my world shine brighter,
 the warmth that fills every quiet moment,
 the dream I never want to wake from.
-
-With you… life feels like a beautiful story
-I never want to end.
+With you… life feels like a beautiful story I never want to end.
 </div>
 
 <div class="meterBox"><div class="meterFill" id="meter"></div></div>
 
-<button id="secretBtn" style="margin-top:25px;padding:12px 30px;border:none;border-radius:30px;background:white;color:#ff4fa3;font-weight:bold;cursor:pointer;">
-Special Message 💌
-</button>
+<div class="actionPanel">
+<button class="centerBtn" id="secretBtn">Special Message 💌</button>
+</div>
 </div>
 
 <div class="secretBackdrop" id="secretBackdrop"></div>
-
 <div class="secretModal" id="secretModal">
 You are the most beautiful chapter of my life ❤️
 </div>
@@ -215,34 +231,68 @@ const loveScene=document.getElementById('loveScene');
 const yesBtn=document.getElementById('yes');
 const noBtn=document.getElementById('no');
 const meter=document.getElementById('meter');
-const music=document.getElementById('music');
 const secretBtn=document.getElementById('secretBtn');
 const secretModal=document.getElementById('secretModal');
 const secretBackdrop=document.getElementById('secretBackdrop');
 
 let heartsRunning=false;
+let yesScale=1;
+let noScale=1;
 
+/* ENTER EXPERIENCE */
 startScreen.onclick=async()=>{
 try{await document.documentElement.requestFullscreen();}catch{}
 startScreen.style.display='none';
 card.classList.add('show');
-music.volume=.5;
-music.play().catch(()=>{});
 }
 
+/* NO BUTTON ESCAPE */
 noBtn.onmouseover=()=>{
 noBtn.style.left=Math.random()*250+'px';
 noBtn.style.top=Math.random()*40+'px';
 }
 
+/* WHEN NO CLICKED → SHRINK + YES GROW */
+noBtn.onclick=()=>{
+
+// update scale values
+yesScale+=0.25;
+noScale-=0.15;
+
+if(noScale<0.45) noScale=0.45;
+
+// apply transform
+yesBtn.style.transform=`scale(${yesScale})`;
+noBtn.style.transform=`scale(${noScale})`;
+
+// animation classes
+yesBtn.classList.add('grow');
+noBtn.classList.add('shrink');
+noBtn.classList.add('shake');
+
+// cute emoji change
+noBtn.innerHTML="No 😭💔";
+yesBtn.innerHTML="Yes 😍💖✨";
+
+// remove animation classes after play
+setTimeout(()=>{
+yesBtn.classList.remove('grow');
+noBtn.classList.remove('shrink');
+noBtn.classList.remove('shake');
+},400);
+}
+
+/* YES CLICK MAGIC */
 yesBtn.onclick=()=>{
 card.style.display='none';
 loveScene.classList.add('active');
 startHearts();
 startSparkles();
+startPetals();
 fillMeter();
 }
 
+/* LOVE METER */
 function fillMeter(){
 let v=0;
 const i=setInterval(()=>{
@@ -252,6 +302,7 @@ if(v>=100) clearInterval(i);
 },25);
 }
 
+/* HEARTS */
 function startHearts(){
 if(heartsRunning) return;
 heartsRunning=true;
@@ -262,10 +313,11 @@ h.innerHTML='💖';
 h.style.left=Math.random()*100+'vw';
 h.style.fontSize=(20+Math.random()*30)+'px';
 document.body.appendChild(h);
-setTimeout(()=>h.remove(),6000);
+setTimeout(()=>h.remove(),7000);
 },250);
 }
 
+/* SPARKLES */
 function startSparkles(){
 setInterval(()=>{
 const s=document.createElement('div');
@@ -277,6 +329,20 @@ setTimeout(()=>s.remove(),2000);
 },120);
 }
 
+/* ROSE PETALS */
+function startPetals(){
+setInterval(()=>{
+const p=document.createElement('div');
+p.className='petal';
+p.innerHTML='🌹';
+p.style.left=Math.random()*100+'vw';
+p.style.animationDuration=(4+Math.random()*4)+'s';
+document.body.appendChild(p);
+setTimeout(()=>p.remove(),8000);
+},300);
+}
+
+/* SECRET MODAL */
 secretBtn.onclick=()=>{
 secretModal.classList.toggle('show');
 secretBackdrop.classList.toggle('show');
@@ -286,6 +352,30 @@ secretBackdrop.onclick=()=>{
 secretModal.classList.remove('show');
 secretBackdrop.classList.remove('show');
 }
+
+/* STARFIELD */
+const canvas=document.getElementById('stars');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+const stars=[];
+for(let i=0;i<200;i++){
+stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2});
+}
+
+function drawStars(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+stars.forEach(s=>{
+ctx.beginPath();
+ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+ctx.fillStyle='white';
+ctx.fill();
+});
+requestAnimationFrame(drawStars);
+}
+
+drawStars();
 
 </script>
 </body>
